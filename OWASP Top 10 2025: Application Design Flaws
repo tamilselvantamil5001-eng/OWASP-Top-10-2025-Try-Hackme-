@@ -1,0 +1,114 @@
+2- Application Design Flaws:
+              In this room, we focus on the OWASP Top 10:2025 categories that arise from mistakes in architecture and
+              system design. You won’t just learn the theory — you’ll get hands-on practice through challenges that reinforceeach concept.
+
+
+The categories we’ll cover are:
+          • AS02 – Security Misconfigurations: 
+                          Mistakes or oversights in how your systems, servers, or applications are set up.
+          • AS03 – Software Supply Chain Failures: 
+                          Risks introduced by third-party components, libraries, or dependencies.
+          • AS04 – Cryptographic Failures: 
+                          Weak or incorrect use of encryption that puts data at risk.
+          • AS06 – Insecure Design: 
+                          Flaws in the application’s overall design that make it inherently vulnerable.
+
+
+Task 2-AS02: Security Misconfigurations:
+                  Security misconfigurations happen when systems, servers, or applications are deployed with unsafe defaults,
+                  incomplete settings, or exposed services. They are setup and architecture mistakes, not code bugs, that can create
+                  easy entry points for attackers. Misconfigurations can occur in server settings, cloud resources, APIs, containers,
+                  or AI/ML endpoints. They often result from lack of hardening, incomplete security reviews, outdated
+                  components, or improper network segmentation. Even small mistakes can expose sensitive data, allow privilege
+                  escalation, or compromise entire systems.
+Common Patterns
+          • Default credentials or weak passwords
+          • Exposed services, APIs, or endpoints
+          • Misconfigured cloud storage or permissions
+          • Verbose error messages revealing system info
+          • Outdated software or components Prevention
+          • Harden default configurations and remove unused features
+          • Enforce strong authentication and least privilege
+          • Limit network exposure and segment sensitive resources
+          • Keep software, frameworks, and containers up to  date
+          • Hide stack traces and system information
+          • Regularly audit configurations and secure AI endpoints
+
+Q1: What's the flag?
+Ans: THM{V3RB0S3_3RR0R_L34K}
+
+Task 3-AS03: Software Supply Chain Failures:
+
+              Software supply chain failures happen when applications depend on third-party components, libraries, services, or
+AI models that are compromised, outdated, or improperly verified. These weaknesses are outside your own code, but
+attackers can exploit them to inject malicious code, bypass security controls, leak sensitive data, or create backdoors.
+Modern applications rely heavily on external packages, APIs, and AI models, making supply chain attacks
+particularly dangerous. Such attacks can be automated, distributed, and hard to detect, affecting thousands of
+systems at once.
+
+Common Patterns
+        • Using unverified or outdated libraries or dependencies
+        • Automatic updates without verification
+        • Over-reliance on third-party AI models
+        • Insecure CI/CD pipelines or build processes
+        • Poor tracking of licenses or component provenance Prevention
+        • Verify all third-party components, libraries, and AI models before use
+        • Monitor and patch dependencies regularly
+        • Sign, audit, and verify software updates and packages
+        • Lock down CI/CD pipelines and build processes
+        • Include supply chain threat modeling in SDLC and deployment workflows
+
+
+Task 4-AS04: Cryptographic Failures:
+
+                  Cryptographic failures occur when encryption is used incorrectly, weakly, or not at all. This includes deprecated
+algorithms, hard-coded keys, poor key management, or unencrypted sensitive data. Web applications rely on
+cryptography to protect network traffic, secure stored data, verify identities, and safeguard secrets. When these
+controls fail, attackers can steal passwords, tokens, or personal information, perform man-in-the-middle attacks,
+brute-force weak keys, or simply access secrets that were never properly protected. This applies to traditional
+systems as well as AI/ML models, where sensitive parameters or inputs can be exposed.
+Common Patterns:
+            • Using weak or deprecated algorithms (e.g., MD5,
+            SHA-1, ECB mode)
+            • Hard-coded secrets in code or config
+            • Poor key rotation or management
+            • Lack of encryption for sensitive data at rest or in
+            transit
+            • Self-signed or invalid TLS certificates
+            • Exposing secrets in AI/ML systems 
+
+Prevention:
+            • Use strong, modern algorithms like AES-GCM, ChaCha20-Poly1305, and enforce TLS 1.3 with valid
+            certificates
+            • Use secure key management systems (e.g., AWS KMS, Azure Key Vault, HashiCorp Vault)
+            • Rotate secrets and keys regularly following defined cryptoperiods
+            • Maintain policies and SOPs for key lifecycle management
+            • Keep an inventory of certificates, keys, and owners
+            • Ensure AI/ML models never expose unencrypted secrets or sensitive inputs
+Task 5-AS06: Insecure Design:
+
+              Insecure design occurs when flawed logic or architecture is built into a system from the start. Causes include skipped
+threat modeling, missing design reviews, or incorrect assumptions. AI systems add risk, as developers may
+blindly trust models that generate queries, code, or classify users, embedding vulnerabilities into the system itself.
+Example: Early Clubhouse assumed mobile-only access, but the backend API had no authentication, exposing
+private user data.
+Common Patterns
+        • Weak business logic controls (e.g., approval or
+        recovery flows)
+        • AI components with unchecked authority or access
+        • Test/debug bypasses left in production
+        • No consistent threat or abuse-case review
+Prevention
+          • Treat all models as untrusted until verified
+          • Validate and filter model inputs/outputs
+          • Require human review for high-risk AI actions
+          • Apply least privilege for users, APIs, and services
+          • Ensure proper authentication, authorization, and
+          session management
+          • Continuously monitor and test the system for logic
+          flaws, abuse paths, and emergent risks
+
+Q1: What's the flag?
+Ans:THM{1NS3CUR3_D35IGN_4SSUMPT10N}
+
+
