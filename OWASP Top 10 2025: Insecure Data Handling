@@ -1,0 +1,86 @@
+3. Insecure Data Handling:
+            In this room, you’ll explore 3 OWASP Top 10:2025 elements that arise from how applications handle user
+input and data:
+
+
+• A04 – Cryptographic Failures: 
+                    Weak or incorrect use of encryption exposing sensitive data.
+• A05 – Injection:   
+                    Flaws that allow attackers to send malicious input, manipulating queries or commands.
+• A08 – Software or Data Integrity Failures: 
+                    Risks from tampered or unverified code, files, or data.
+
+
+You’ll learn the theory behind these vulnerabilities, how to prevent them, and get hands-on experience by practicing
+exploitation in a controlled environment.
+
+
+
+Task 2-A04: Cryptographic Failures:
+
+          Cryptographic failures occur when sensitive data isn’t properly protected due to missing or weak encryption,
+poor implementation, or inadequate security practices.
+
+Examples include:
+          • Storing passwords without hashing 
+          • Using outdated or weak algorithms (MD5, SHA-1, DES)
+          • Exposing encryption keys
+          • Failing to secure data in transit A classic mistake is “rolling your own cryptography”
+          instead of using proven, vetted algorithms.
+
+Prevention
+          • Use strong, modern algorithms and trusted libraries for encryption
+          • Hash passwords with bcrypt, scrypt, or Argon2
+          • Never embed secrets or credentials in code or config files
+          • Use secure key management systems to store secrets
+          • Ensure data in transit and at rest is properly encrypted
+
+Q1. Decrypt the encrypted notes. One of them will contain a flag value. What is it?
+Ans: THM{WEAK_CRYPTO_FLAG}
+
+Task 3-A05: Injection:
+
+            Injection occurs when an application mishandles user input, passing it directly into a system that can execute
+commands or queries, such as a database, shell, templating engine, or API.
+A classic example is SQL Injection, where user input (like a username) is directly used to build a query without
+sanitization. Other types include:
+                      • Command Injection
+                      • SQL Injection
+                      • Server-Side Template Injection (SSTI)
+                      • AI Prompt Injection
+                      Injection remains highly critical, as attackers can manipulate input to steal data, bypass authentication, or
+                      execute commands.
+Prevention
+          • Treat all user input as untrusted
+          • Use prepared statements or parameterized queries
+          instead of string concatenation for SQL
+          • Avoid passing input directly to system commands; use safe APIs instead
+          • Validate and sanitize input: enforce strict data types,escape dangerous characters, and filter before
+          processing .
+          • Apply consistent input handling across all user entry points
+
+Q1: Perform an SSTI attack on the practical. You need to read the contents of flag.txt that is located
+within the same directory as the web application.
+Ans: THM{SSTI_FLAG_OBTAINED}
+
+
+Task 4-A08: Software or Data Integrity Failures:
+
+Software or Data Integrity Failures (A08)
+
+These failures occur when an application trusts code,
+updates, or data without verifying their authenticity,
+integrity, or origin. Examples include:
+                • Installing software updates without verification
+                • Loading scripts or configuration files from untrusted sources
+                • Accepting unvalidated data (binaries, templates, JSON) that affects application logic
+Attackers can exploit these weaknesses to inject malicious code, alter behaviour, or compromise sensitive data.
+Prevention
+            • Establish clear trust boundaries for code, updates, and data
+            • Verify all updates and critical files using cryptographic checks (checksums, signatures)
+            • Ensure only trusted sources can modify critical components
+            • Integrate integrity verification into CI/CD pipelines and build processes
+Q1: What are the contents of flag.txt?
+Ans: THM{INSECURE_DESERIALIZATION}
+
+
