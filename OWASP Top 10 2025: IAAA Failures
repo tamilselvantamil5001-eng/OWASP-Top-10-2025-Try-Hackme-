@@ -1,0 +1,103 @@
+1.IAAA Failures:
+This room introduces three key categories from the
+OWASP Top 10 (2025):
+->A01: Broken Access Control
+
+->A07: Authentication Failures
+
+->A09: Logging & Alerting Failures.
+
+->It focuses on how weaknesses in Identity, Authentication,Authorization, and Accountability (IAAA) can lead to
+security issues in applications. Through beginner-friendlyexplanations and hands-on challenges, the room helps
+build practical understanding of these concepts even for those with no prior cybersecurity knowledge.
+
+
+Introduction:
+          IAAA is a structured way to understand how user access works in applications, where each step depends on the
+          previous one and cannot be skipped. It is closely related tosecurity issues highlighted by the OWASP Top 10 (2025),
+          as failures in implementing these concepts can lead to serious risks like unauthorized access, data exposure, and
+          privilege escalation.
+->Identity → Unique account representing a user (e.g., userID or email)
+->Authentication → Verifies the identity (passwords, OTPs,passkeys)
+->Authorisation → Determines what the user is allowed toaccess or do
+->Accountability → Tracks and logs user actions (who didwhat, when, where)
+
+Q1: What does IAAA stand for?
+Ans: Identity, Authentication, Authorization,Accountability.
+
+
+
+
+->Task 3-A01: Broken Access Control:
+              Broken Access Control occurs when an application fails to properly restrict what users can access.
+A common example is IDOR (Insecure Direct Object Reference), where simply changing a parameter like ?id=7
+to ?id=6 allows access to another user’s data. This can lead to horizontal privilege escalation (accessing other users’
+data) or vertical privilege escalation (gaining admin-level access).
+->Horizontal Privilege Escalation : A user accesses other users’ data at the same permission level.
+->Example: Changing accountID=7 to accountID=6 to view another user’s bank details.
+->Vertical Privilege Escalation : A user gains higherlevel permissions than they should have.
+->Example: A normal user accessing admin-only pages or functions.
+->In this task, by modifying the accountID in the URL and checking different users, you can identify which account
+  has more than $1 million.
+ ->Given site:
+
+      After changing the id value given at the top by changing it to values ranging like 0,1,…,n.
+      Or else we can use Burp Suite. IDOR can be found using it by intercepting and modifying request parameters like IDs.
+
+->We need to try different id’s so that we can able to find the flag.
+Q1: If you don't get access to more roles but can view the data of another users, what type of privilege escalation isthis?
+Ans: Horizontal
+
+Q2: What is the note you found when viewing the user's account who had more than $ 1 million?
+Ans: THM{Found.the.Millionare!}
+
+
+->Task 4-A07: Authentication Failures:
+              Authentication Failures occur when an application cannot properly verify a user’s identity. This can happen due to
+              issues like username enumeration, weak passwords, flaws in login/registration logic, or insecure session handling,
+              allowing attackers to log in as other users. In this task, the flaw is case-insensitive username
+              handling. By registering a user as “aDmiN”, the application treats it as the same as “admin”, allowing you
+              to log into the admin account.
+Given site:
+
+
+Procedure:
+Step 1: Click on the “register here” option.
+Step 2: Enter the required details, using “aDmiN” as the
+username.
+
+
+Step 3: Once registration is complete, log in using the same
+credentials.
+Step 4: You will then gain access to the admin account
+
+Q1: What is the flag on the admin user's dashboard?
+Ans: THM{Account.confusion.FTW!}
+
+
+
+
+Task 5-A09: Logging & Alerting Failures:
+              Logging & Alerting Failures happen when an application does not properly record or monitor important security
+              events. Without proper logs, it becomes very difficult to detect attacks, investigate incidents, or prove what actions
+              were performed by a user.
+              In practice, this includes missing login records, unclear error messages, no alerts for suspicious activity (like
+               brute-force attacks), short log storage, or logs that attackers can modify. During an investigation, logs are
+              crucial to understand what happened—if key information is missing, tracing the attack becomes extremely difficult
+              or even impossible.
+
+Given site:
+
+
+Q1: It looks like an attacker tried to perform a brute-force
+attack, what is the IP of the attacker?
+Ans: 203.0.113.45
+
+Q2: Looks like they were able to gain access to an account!
+  Ans: admin
+
+Q3: What action did the attacker try to do with the
+account? List the endpoint the accessed.
+Ans: /supersecretadminstuff
+
+
